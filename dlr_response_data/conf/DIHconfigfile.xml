@@ -1,0 +1,23 @@
+<dataConfig>
+    <dataSource driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/test" user="root" password="" />
+    <document>
+        <entity name="dlr_response_data" query="select ref_id,status_map_id,dlr_time,vendor_dlr_time,response_text,created_time from dlr_response_data"
+                deltaQuery="select id from dlr_response_data where created_time > '${dataimporter.last_index_time}'">
+
+            <field column="ref_id" name="ref_id" /> <!-- make this type pint when going on production -->
+            <field column="status_map_id" name="status_map_id" />
+            <field column="dlr_time" name="dlr_time" />
+            <field column="vendor_dlr_time" name="vendor_dlr_time" />
+            <field column="response_text" name="response_text" />
+            <field column="created_time" name="created_time" />
+            <entity name="dlr_status_map"
+              query="select status,status_desc,error,error_desc,dm_status_mapped from dlr_status_map where id = ${dlr_response_data.status_map_id}">
+              <field column="status" name="status" />
+              <field column="status_desc" name="status_desc" />
+              <field column="error" name="error" />
+              <field column="error_desc" name="error_desc" />
+              <field column="dm_status_mapped" name="dm_status_mapped" />
+            </entity>
+        </entity>
+    </document>
+</dataConfig>

@@ -1,0 +1,21 @@
+<dataConfig>
+    <dataSource driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/test" user="root" password="" />
+    <document>
+        <entity name="sms_request_data" query="select ref_id,gateway_id,enc_text,uri,http_status,response_text,latency,api_call_status,msg_id,api_call_error_text,created_time from sms_request_data"
+                deltaQuery="select id from sms_request_data where created_time > '${dataimporter.last_index_time}'">
+
+            <field column="ref_id" name="ref_id" />
+            <field column="gateway_id" name="gateway_id" />
+            <field column="enc_text" name="enc_text" />
+            <field column="uri" name="uri" />
+            <field column="http_status" name="http_status" />
+            <field column="response_text" name="response_text" />
+            <field column="latency" name="latency" />
+            <field column="api_call_status" name="api_call_status" />
+            <field column="msg_id" name="msg_id" />
+            <field column="api_call_error_text" name="api_call_error_text" />
+            <field column="created_time" name="created_time" />
+
+        </entity>
+    </document>
+</dataConfig>

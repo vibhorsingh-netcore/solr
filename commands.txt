@@ -1,0 +1,27 @@
+curl -X POST -H 'Content-type:application/json' --data-binary '{
+  "delete-field" : { "name":"ref_id" }
+}' http://localhost:5000/solr/sms_request_data/schema
+
+
+
+curl -X POST -H 'Content-type:application/json' --data-binary '{
+  "add-field":{
+     "name":"ref_id",
+     "type":"plong",
+     "stored":true,
+     "indexed": true	 }
+}' http://localhost:5000/solr/sms_request_data/schema
+
+
+
+curl http://localhost:5000/solr/sms_request_data/update?commit=true --data '<delete><query>*:*</query></delete>' -H 'Content-type:text/xml; charset=utf-8'
+
+
+http://localhost:8984/solr/sms_request_data/dataimport//dataimport?
+
+http://localhost:5000/solr/sms_request_data/dataimport?command=status&wt=json
+http://localhost:5000/solr/sms_request_data/dataimport?command=show-config&wt=json
+http://localhost:5000/solr/sms_request_data/dataimport?command=reload-config&wt=json
+http://localhost:5000/solr/sms_request_data/dataimport?command=status&indent=on&wt=json
+http://localhost:5000/solr/sms_request_data/dataimport?command=full-import&wt=json
+http://localhost:5000/solr/sms_request_data/dataimport?command=delta-import&wt=json
